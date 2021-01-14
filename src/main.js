@@ -8,6 +8,3 @@ new Vue({
   router,
   render: h => h(App)
 }).$mount('#app')
-const a = 1
-
-console.log(a)
