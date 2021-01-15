@@ -9,7 +9,8 @@
           <el-input v-model="user.mobile"> </el-input>
         </el-form-item>
         <el-form-item label="密码" prop="code">
-          <el-input v-model="user.code"> </el-input>
+          <!-- show-password小眼睛 -->
+          <el-input v-model="user.code" show-password> </el-input>
         </el-form-item>
         <el-form-item>
           <!-- :value="true" 选中复选框不能进行修改  必须同意 -->
@@ -36,7 +37,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'Login',
   data () {
@@ -84,15 +84,13 @@ export default {
       })
     },
     doLogin () {
+      // console.log(this.$http)
       if (!this.checked) {
         return this.$message.warning('请同意用户协议')
       }
       this.loading = true
-      axios
-        .post(
-          'http://api-toutiao-web.itheima.net/mp/v1_0/authorizations',
-          this.user
-        )
+      this.$http
+        .post('/mp/v1_0/authorizations', this.user)
         .then(res => {
           console.log(res)
           if (res.status === 201) {
